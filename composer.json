@@ -1,0 +1,6 @@
+{
+    "require": {
+        "symfony/security-core": "^5.4",
+        "symfony/security-http": "^5.4"
+    }
+}

@@ -1,0 +1,22 @@
+version: '3.8'
+
+services:
+  security_101:
+    build: docker/php
+    container_name: security_101
+    ports:
+      - ${HTTP_PORT}:80
+      - ${HTTPS_PORT}:443
+    volumes:
+      - ./docker/php/conf.d/000-default.conf:/etc/apache2/sites-available/000-default.conf
+      - ./docker/php/conf.d/default-ssl.conf:/etc/apache2/sites-available/default-ssl.conf
+      - ./:/srv/app
+      - ./docker/php/cert/mycert.crt:/etc/ssl/certs/mycert.crt
+      - ./docker/php/cert/mycert.key:/etc/ssl/private/mycert.key
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    networks:
+      - security_101
+
+networks:
+  security_101:
